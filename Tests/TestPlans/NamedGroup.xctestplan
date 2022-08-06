@@ -17,6 +17,7 @@
         "StringRegexTests\/testEmpty()",
         "StringRegexTests\/testGroupsEmpty()",
         "StringRegexTests\/testRegexMixed()",
+        "StringRegexTests\/testRegexMixedUnamedNamedGroups()",
         "StringRegexTests\/testRegexMultiple()",
         "StringRegexTests\/testRegexUnamedGroups()",
         "StringRegexTests\/testRegexUnamedGroupsTokens()"

@@ -20,6 +20,7 @@
         "StringRegexTests\/testRegexMixedUnamedNamedGroups()",
         "StringRegexTests\/testRegexNamedGroups()",
         "StringRegexTests\/testRegexUnamedGroups()",
+        "StringRegexTests\/testRegexUnamedGroupsEmpty()",
         "StringRegexTests\/testRegexUnamedGroupsTokens()"
       ],
       "target" : {
