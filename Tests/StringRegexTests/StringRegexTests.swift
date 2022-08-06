@@ -37,11 +37,11 @@ final class StringRegexTests: XCTestCase {
         XCTAssertEqual(matches, ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"])
     }
     
-    func testGroupsEmpty() {
+    func testRegexUnamedGroupsEmpty() {
         let s = ""
         let regex = "(\\w+)"
         let matches = s.matchUnnamedGroups(regex: regex)
-        XCTAssertEqual(matches.isEmpty, true)
+        XCTAssertNil(matches)
     }
     
     func testRegexEmptyNamedGroups() {

@@ -19,13 +19,13 @@ extension String {
     /// Gets unnamed regex capture groups
     /// - Parameter regex: regex expression
     /// - Returns: Array of matches
-    func matchUnnamedGroups(regex: String) -> [String] {
+    func matchUnnamedGroups(regex: String) -> [String]? {
         let range = NSRange(location: 0, length: self.utf16.count)
             let regex = try! NSRegularExpression(pattern: regex)
         let matches = regex.matches(in: self, range: range)
         
         guard let first = matches.first else {
-            return []
+            return nil
         }
         
         guard first.numberOfRanges == 1 else {
@@ -44,15 +44,14 @@ extension String {
             return names
         }
 
-        return []
+        return nil
     }
     
     /// Gets named regex capture groups
     /// - Parameter regex: regex expression
     /// - Returns: Dictionary with group name as key and its value
     func matchNamedGroups(regex: String) -> [String: String]? {
-        let groups = regex.matchUnnamedGroups(regex: "\\(\\?<(\\w+)>")
-        guard groups != [] else {
+        guard let groups = regex.matchUnnamedGroups(regex: "\\(\\?<(\\w+)>") else {
             return nil
         }
 
