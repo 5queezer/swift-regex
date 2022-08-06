@@ -39,8 +39,8 @@ final class StringRegexTests: XCTestCase {
     
     func testGroupsEmpty() {
         let s = ""
-        let regex = "\\w"
-        let matches = s.matches(regex: regex)
+        let regex = "(\\w+)"
+        let matches = s.matchUnnamedGroups(regex: regex)
         XCTAssertEqual(matches.isEmpty, true)
     }
     

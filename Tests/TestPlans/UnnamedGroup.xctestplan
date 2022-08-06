@@ -1,0 +1,32 @@
+{
+  "configurations" : [
+    {
+      "id" : "9BCB3C0D-319C-401D-B64A-8F119F51D89F",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "StringRegexTests\/testEmpty()",
+        "StringRegexTests\/testRegexEmptyNamedGroups()",
+        "StringRegexTests\/testRegexMixed()",
+        "StringRegexTests\/testRegexMixedUnamedNamedGroups()",
+        "StringRegexTests\/testRegexMultiple()",
+        "StringRegexTests\/testRegexNamedGroups()"
+      ],
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "StringRegexTests",
+        "name" : "StringRegexTests"
+      }
+    }
+  ],
+  "version" : 1
+}
