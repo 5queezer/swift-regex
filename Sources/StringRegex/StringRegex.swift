@@ -1,6 +1,5 @@
 import Foundation
 
-
 extension String {
     /// Get rexeg matches
     /// - Parameter regex: regex expression
@@ -9,13 +8,13 @@ extension String {
         let range = NSRange(location: 0, length: self.utf16.count)
             let regex = try! NSRegularExpression(pattern: regex)
         let matches = regex.matches(in: self, range: range)
-        
+
         let result: [String]? = matches.map { m in
             (self as NSString).substring(with: m.range(at: 0))
         }
         return result!.count > 0 ? result : nil
     }
-    
+
     /// Gets unnamed regex capture groups
     /// - Parameter regex: regex expression
     /// - Returns: Array of matches
@@ -23,11 +22,11 @@ extension String {
         let range = NSRange(location: 0, length: self.utf16.count)
             let regex = try! NSRegularExpression(pattern: regex)
         let matches = regex.matches(in: self, range: range)
-        
+
         guard let first = matches.first else {
             return nil
         }
-        
+
         guard first.numberOfRanges == 1 else {
             var names: [String] = []
             for match in matches {
@@ -40,13 +39,13 @@ extension String {
                     }
                 }
             }
-            
+
             return names
         }
 
         return nil
     }
-    
+
     /// Gets named regex capture groups
     /// - Parameter regex: regex expression
     /// - Returns: Dictionary with group name as key and its value
@@ -57,13 +56,13 @@ extension String {
 
         let range = NSRange(location: 0, length: self.utf16.count)
         let regex = try! NSRegularExpression(pattern: regex)
-        
+
         guard let match = regex.matches(in: self, range: range).first else {
             return nil
         }
-        
+
         var result: [String: String] = [:]
-        
+
         for group in groups {
             let matchRange = match.range(withName: group)
             if let substringRange = Range(matchRange, in: self) {
@@ -71,8 +70,8 @@ extension String {
                 result[group] = capture
             }
         }
-        
+
         return result
     }
-    
+
 }
