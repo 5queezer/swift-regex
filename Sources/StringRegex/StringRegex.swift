@@ -2,9 +2,9 @@ import Foundation
 
 
 extension String {
-    /// Get rexeg matches from String
+    /// Get rexeg matches
     /// - Parameter regex: regex expression
-    /// - Returns: Array of matches as Strings
+    /// - Returns: Array of matches
     func matches(regex: String) -> [String] {
         let range = NSRange(location: 0, length: self.utf16.count)
             let regex = try! NSRegularExpression(pattern: regex)
@@ -16,9 +16,9 @@ extension String {
         return result!
     }
     
-    /// Gets unnamed groups
+    /// Gets unnamed regex capture groups
     /// - Parameter regex: regex expression
-    /// - Returns: Array of matches as Strings
+    /// - Returns: Array of matches
     func matchUnnamedGroups(regex: String) -> [String] {
         let range = NSRange(location: 0, length: self.utf16.count)
             let regex = try! NSRegularExpression(pattern: regex)
@@ -47,8 +47,8 @@ extension String {
         return []
     }
     
-    /// Gets named capture groups
-    /// - Parameter regex: a regex expression
+    /// Gets named regex capture groups
+    /// - Parameter regex: regex expression
     /// - Returns: Dictionary with group name as key and its value
     func matchNamedGroups(regex: String) -> [String: String]? {
         let groups = regex.matchUnnamedGroups(regex: "\\(\\?<(\\w+)>")
