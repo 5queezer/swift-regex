@@ -1,10 +1,11 @@
 import Foundation
 
 extension String {
+    
     /// Get rexeg matches
     /// - Parameter regex: regex expression
     /// - Returns: Array of matches
-    func matches(regex: String) -> [String]? {
+    public func matches(regex: String) -> [String]? {
         let range = NSRange(location: 0, length: self.utf16.count)
             let regex = try! NSRegularExpression(pattern: regex)
         let matches = regex.matches(in: self, range: range)
@@ -18,7 +19,7 @@ extension String {
     /// Gets unnamed regex capture groups
     /// - Parameter regex: regex expression
     /// - Returns: Array of matches
-    func matchUnnamedGroups(regex: String) -> [String]? {
+    public func matchUnnamedGroups(regex: String) -> [String]? {
         let range = NSRange(location: 0, length: self.utf16.count)
             let regex = try! NSRegularExpression(pattern: regex)
         let matches = regex.matches(in: self, range: range)
@@ -49,7 +50,7 @@ extension String {
     /// Gets named regex capture groups
     /// - Parameter regex: regex expression
     /// - Returns: Dictionary with group name as key and its value
-    func matchNamedGroups(regex: String) -> [String: String]? {
+    public func matchNamedGroups(regex: String) -> [String: String]? {
         guard let groups = regex.matchUnnamedGroups(regex: "\\(\\?<(\\w+)>") else {
             return nil
         }
