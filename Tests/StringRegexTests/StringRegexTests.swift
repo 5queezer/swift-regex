@@ -6,7 +6,7 @@ final class StringRegexTests: XCTestCase {
         let s = ""
         let regex = "\\w"
         let matches = s.matches(regex: regex)
-        XCTAssertEqual(matches.isEmpty, true)
+        XCTAssertNil(matches)
     }
     
     func testRegexMultiple() {

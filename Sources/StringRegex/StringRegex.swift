@@ -5,7 +5,7 @@ extension String {
     /// Get rexeg matches
     /// - Parameter regex: regex expression
     /// - Returns: Array of matches
-    func matches(regex: String) -> [String] {
+    func matches(regex: String) -> [String]? {
         let range = NSRange(location: 0, length: self.utf16.count)
             let regex = try! NSRegularExpression(pattern: regex)
         let matches = regex.matches(in: self, range: range)
@@ -13,7 +13,7 @@ extension String {
         let result: [String]? = matches.map { m in
             (self as NSString).substring(with: m.range(at: 0))
         }
-        return result!
+        return result!.count > 0 ? result : nil
     }
     
     /// Gets unnamed regex capture groups
