@@ -55,13 +55,26 @@ final class StringRegexTests: XCTestCase {
         let s = "John Doe"
         let regex = "(?<forname>\\w+)\\s+(?<surname>\\w+)"
         let matches = s.matchNamedGroups(regex: regex)
-        XCTAssertEqual(matches!, ["forname": "John", "surname": "Doe"])
+        XCTAssertEqual(matches!, [["forname": "John", "surname": "Doe"]])
+    }
+
+    func testRegexNamedMultipleGroups() {
+        let s = """
+                foo0 = bar0
+                foo1 = bar1
+                """
+        let regex = "(?<key>\\w+) = (?<value>\\w+)"
+        let matches = s.matchNamedGroups(regex: regex)
+        XCTAssertEqual(matches!, [
+            ["key": "foo0", "value": "bar0"],
+            ["key": "foo1", "value": "bar1"]
+        ])
     }
 
     func testRegexMixedUnamedNamedGroups() {
         let s = "John Peter Doe"
         let regex = "(?<forename>\\w+)\\s+(\\w+)\\s+(?<surname>\\w+)"
         let matches = s.matchNamedGroups(regex: regex)
-        XCTAssertEqual(matches!, ["forename": "John", "surname": "Doe"])
+        XCTAssertEqual(matches!, [["forename": "John", "surname": "Doe"]])
     }
 }
