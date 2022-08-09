@@ -66,11 +66,11 @@ extension String {
 
         var result: [[String: String]] = []
 
-        for m in matches {
+        for match in matches {
             result.append([:])
             let index = result.count - 1
             for group in groups {
-                let matchRange = m.range(withName: group)
+                let matchRange = match.range(withName: group)
                 if let substringRange = Range(matchRange, in: self) {
                     let capture = String(self[substringRange])
                     result[index][group] = capture
