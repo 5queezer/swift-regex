@@ -7,7 +7,7 @@ extension String {
     /// - Returns: Array of matches
     public func matches(regex: String) throws -> [String]? {
         let range = NSRange(location: 0, length: self.utf16.count)
-            let regex = try NSRegularExpression(pattern: regex)
+        let regex = try NSRegularExpression(pattern: regex)
         let matches = regex.matches(in: self, range: range)
 
         let result: [String]? = matches.map { m in
@@ -21,7 +21,7 @@ extension String {
     /// - Returns: Array of matches
     public func matchUnnamedGroups(regex: String) throws -> [String]? {
         let range = NSRange(location: 0, length: self.utf16.count)
-            let regex = try NSRegularExpression(pattern: regex)
+        let regex = try NSRegularExpression(pattern: regex)
         let matches = regex.matches(in: self, range: range)
 
         guard let first = matches.first else {

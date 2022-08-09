@@ -17,10 +17,10 @@ final class StringRegexTests: XCTestCase {
     }
 
     func testRegexMixed() throws {
-        let testString = "Hello 2 World! 123 456."
+        let testString = "Hello 2 the World!"
         let regex = "[[:alpha:]]+|[[:digit:]]+"
         let matches = try testString.matches(regex: regex)
-        XCTAssertEqual(matches, ["Hello", "2", "World", "123", "456"])
+        XCTAssertEqual(matches, ["Hello", "2", "the", "World"])
     }
 
     func testRegexUnamedGroups() throws {
@@ -38,15 +38,15 @@ final class StringRegexTests: XCTestCase {
     }
 
     func testRegexUnamedGroupsEmpty() throws {
-        let testString = ""
+        let testString = "👻"
         let regex = "(\\w+)"
         let matches = try testString.matchUnnamedGroups(regex: regex)
         XCTAssertNil(matches)
     }
 
     func testRegexEmptyNamedGroups() throws {
-        let testString = ""
-        let regex = "(?<forname>John)\\s*(?<surname>Doe)"
+        let testString = "John Doe"
+        let regex = "(?<forname>Peter)\\s+(?<surname>Doe)"
         let matches = try testString.matchNamedGroups(regex: regex)
         XCTAssertNil(matches)
     }
@@ -91,7 +91,7 @@ final class StringRegexTests: XCTestCase {
         XCTAssertThrowsError(try testString.matchUnnamedGroups(regex: regex))
         
         // Brackets as quantifier must contain an integer
-        regex = "(?<token>.*{\\w})"
+        regex = "(?<token>{\\w+})"
         XCTAssertThrowsError(try testString.matchNamedGroups(regex: regex))
     }
 }
