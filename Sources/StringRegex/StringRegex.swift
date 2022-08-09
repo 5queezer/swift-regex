@@ -5,9 +5,9 @@ extension String {
     /// Get rexeg matches
     /// - Parameter regex: regex expression
     /// - Returns: Array of matches
-    public func matches(regex: String) -> [String]? {
+    public func matches(regex: String) throws -> [String]? {
         let range = NSRange(location: 0, length: self.utf16.count)
-            let regex = try! NSRegularExpression(pattern: regex)
+            let regex = try NSRegularExpression(pattern: regex)
         let matches = regex.matches(in: self, range: range)
 
         let result: [String]? = matches.map { m in
@@ -19,9 +19,9 @@ extension String {
     /// Gets unnamed regex capture groups
     /// - Parameter regex: regex expression
     /// - Returns: Array of matches
-    public func matchUnnamedGroups(regex: String) -> [String]? {
+    public func matchUnnamedGroups(regex: String) throws -> [String]? {
         let range = NSRange(location: 0, length: self.utf16.count)
-            let regex = try! NSRegularExpression(pattern: regex)
+            let regex = try NSRegularExpression(pattern: regex)
         let matches = regex.matches(in: self, range: range)
 
         guard let first = matches.first else {
@@ -50,13 +50,13 @@ extension String {
     /// Gets named regex capture groups
     /// - Parameter regex: regex expression
     /// - Returns: Dictionary with group name as key and its value
-    public func matchNamedGroups(regex: String) -> [[String: String]]? {
-        guard let groups = regex.matchUnnamedGroups(regex: "\\(\\?<(\\w+)>") else {
+    public func matchNamedGroups(regex: String) throws -> [[String: String]]? {
+        guard let groups = try regex.matchUnnamedGroups(regex: "\\(\\?<(\\w+)>") else {
             return nil
         }
 
         let range = NSRange(location: 0, length: self.utf16.count)
-        let regex = try! NSRegularExpression(pattern: regex)
+        let regex = try NSRegularExpression(pattern: regex)
 
         guard let _ = regex.matches(in: self, range: range).first else {
             return nil
