@@ -25,9 +25,9 @@ final class StringRegexTests: XCTestCase {
 
     func testRegexUnamedGroups() throws {
         let testString = "The quick brown fox jumps over the lazy dog."
-        let regex = "(fox).*(dog).*"
+        let regex = "(\\w+){1}.*(?<=\\s)(\\w+)"
         let matches = try testString.matchUnnamedGroups(regex: regex)
-        XCTAssertEqual(matches, ["fox", "dog"])
+        XCTAssertEqual(matches, ["The", "dog"])
     }
 
     func testRegexUnamedGroupsTokens() throws {
