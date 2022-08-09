@@ -60,8 +60,9 @@ final class StringRegexTests: XCTestCase {
 
     func testRegexNamedMultipleGroups() throws {
         let testString = """
-                foo0 = bar0
-                foo1 = bar1
+                [section]
+                foo0 = bar0;
+                foo1 = bar1;
                 """
         let regex = "(?<key>\\w+) = (?<value>\\w+)"
         let matches = try testString.matchNamedGroups(regex: regex)
