@@ -91,7 +91,7 @@ final class StringRegexTests: XCTestCase {
         XCTAssertThrowsError(try testString.matchUnnamedGroups(regex: regex))
         
         // Brackets as quantifier must contain an integer
-        regex = "(?<token>{\\w+})"
+        regex = "(?<token>{a})"
         XCTAssertThrowsError(try testString.matchNamedGroups(regex: regex))
     }
 }
