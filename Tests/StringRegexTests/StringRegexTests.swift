@@ -4,7 +4,7 @@ import XCTest
 final class StringRegexTests: XCTestCase {
     func testEmpty() throws {
         let testString = ""
-        let regex = "\\w"
+        let regex = #"\w"#
         let matches = try testString.matches(regex: regex)
         XCTAssertNil(matches)
     }
@@ -25,35 +25,35 @@ final class StringRegexTests: XCTestCase {
 
     func testRegexUnnamedGroups() throws {
         let testString = "The quick brown fox jumps over the lazy dog."
-        let regex = "(\\w+){1}.*(?<=\\s)(\\w+)"
+        let regex = #"(\w+){1}.*(?<=\s)(\w+)"#
         let matches = try testString.matchUnnamedGroups(regex: regex)
         XCTAssertEqual(matches, ["The", "dog"])
     }
 
     func testRegexUnnamedGroupsTokens() throws {
         let testString = "The quick brown fox jumps over the lazy dog."
-        let regex = "(\\w+)"
+        let regex = #"(\w+)"#
         let matches = try testString.matchUnnamedGroups(regex: regex)
         XCTAssertEqual(matches, ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"])
     }
 
     func testRegexUnnamedGroupsEmpty() throws {
         let testString = "👻"
-        let regex = "(\\w+)"
+        let regex = #"(\w+)"#
         let matches = try testString.matchUnnamedGroups(regex: regex)
         XCTAssertNil(matches)
     }
 
     func testRegexEmptyNamedGroups() throws {
         let testString = "John Doe"
-        let regex = "(?<forename>Peter)\\s+(?<surname>Doe)"
+        let regex = #"(?<forename>Peter)\s+(?<surname>Doe)"#
         let matches = try testString.matchNamedGroups(regex: regex)
         XCTAssertNil(matches)
     }
 
     func testRegexNamedGroups() throws {
         let testString = "John Doe"
-        let regex = "(?<forename>\\w+)\\s+(?<surname>\\w+)"
+        let regex = #"(?<forename>\w+)\s+(?<surname>\w+)"#
         let matches = try testString.matchNamedGroups(regex: regex)
         XCTAssertEqual(matches!, [["forename": "John", "surname": "Doe"]])
     }
@@ -64,7 +64,7 @@ final class StringRegexTests: XCTestCase {
                 foo0 = bar0;
                 foo1 = bar1;
                 """
-        let regex = "(?<key>\\w+) = (?<value>\\w+)"
+        let regex = #"(?<key>\w+) = (?<value>\w+)"#
         let matches = try testString.matchNamedGroups(regex: regex)
         XCTAssertEqual(matches!, [
             ["key": "foo0", "value": "bar0"],
@@ -74,7 +74,7 @@ final class StringRegexTests: XCTestCase {
 
     func testRegexMixedUnnamedNamedGroups() throws {
         let testString = "John Peter Doe"
-        let regex = "(?<forename>\\w+)\\s+(\\w+)\\s+(?<surname>\\w+)"
+        let regex = #"(?<forename>\w+)\s+(\w+)\s+(?<surname>\w+)"#
         let matches = try testString.matchNamedGroups(regex: regex)
         XCTAssertEqual(matches!, [["forename": "John", "surname": "Doe"]])
     }
@@ -83,11 +83,11 @@ final class StringRegexTests: XCTestCase {
         let testString = "The quick brown fox jumps over the lazy {animal}."
         
         // Brackets as strings must be escaped
-        var regex = "{\\w+}"
+        var regex = #"{\w+}"#
         XCTAssertThrowsError(try testString.matches(regex: regex))
         
         // Unmatched parentheses
-        regex = "(\\w+"
+        regex = #"(\w+"#
         XCTAssertThrowsError(try testString.matchUnnamedGroups(regex: regex))
         
         // Brackets as quantifier must contain an integer

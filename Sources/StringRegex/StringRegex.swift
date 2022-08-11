@@ -51,7 +51,7 @@ extension String {
     /// - Parameter regex: regex expression
     /// - Returns: Dictionary with group name as key and its value
     public func matchNamedGroups(regex: String) throws -> [[String: String]]? {
-        let groups = try regex.matchUnnamedGroups(regex: "\\(\\?<(\\w+)>")
+        let groups = try regex.matchUnnamedGroups(regex: #"\(\?<(\w+)>"#)
 
         let range = NSRange(location: 0, length: self.utf16.count)
         let regex = try NSRegularExpression(pattern: regex)
